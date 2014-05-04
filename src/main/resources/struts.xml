@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.custom.i18n.resources" value="global" />
+	<!-- enable 'action' attribute -->
+	<constant name="struts.mapper.action.prefix.enabled" value="false" />
+	<!-- enable 'method' attribute -->
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+
+	<package name="default" namespace="/" extends="struts-default">
+
+		<action name="mainAction"
+			class="com.danielme.tips.struts2.tip14.actions.MainAction">
+			<result name="success">/jsp/form.jsp</result>			
+		</action>
+		
+		<action name="writeCookies"
+			class="com.danielme.tips.struts2.tip14.actions.MainAction">
+			 <interceptor-ref name="defaultStack"/>
+   			<interceptor-ref name="cookieProvider"/>
+			<result name="success">/jsp/form.jsp</result>			
+		</action>
+		
+		<action name="readCookies" class="com.danielme.tips.struts2.tip14.actions.MainAction">
+			<interceptor-ref name="defaultStack"/>     
+			<interceptor-ref name="cookie">
+				<param name="cookiesName">tip14cookie_0,tip14cookie_1</param>
+      			<param name="cookiesValue">*</param>
+			</interceptor-ref>
+			<result name="success">/jsp/form.jsp</result>			
+		</action>		
+
+	</package>
+
+</struts>
